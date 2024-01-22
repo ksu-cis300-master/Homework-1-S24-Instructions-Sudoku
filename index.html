@@ -1,0 +1,598 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+
+<link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
+.mac-os-11 { --title-bar-height:28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex:2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.42857rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left: 28px solid transparent; border-right: 28px solid transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right: 8px solid transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+
+
+:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+/* open-sans-regular - latin-ext_latin */
+  /* open-sans-italic - latin-ext_latin */
+    /* open-sans-700 - latin-ext_latin */
+    /* open-sans-700italic - latin-ext_latin */
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: "Open Sans","Clear Sans", "Helvetica Neue", Helvetica, Arial, 'Segoe UI Emoji', sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
+}
+
+@media only screen and (min-width: 1800px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+
+/*@media print {
+    .typora-export h1,
+    .typora-export h2 {
+        border-bottom: none;
+        padding-bottom: initial;
+    }
+
+    .typora-export h1::after,
+    .typora-export h2::after {
+        content: "";
+        display: block;
+        height: 100px;
+        margin-top: -96px;
+        border-top: 1px solid #eee;
+    }
+}*/
+
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table th:first-child,
+table td:first-child {
+    margin-top: 0;
+}
+table th:last-child,
+table td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    table,
+    pre {
+        page-break-inside: avoid;
+    }
+    pre {
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    background: #fafafa;
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+/*.html-for-mac {
+    --item-hover-bg-color: #E6F0FE;
+}*/
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+    opacity: 0.4;
+}
+
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
+
+.menu-item-container a.menu-style-btn {
+    background-color: #f5f8fa;
+    background-image: linear-gradient( 180deg , hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0)); 
+}
+
+
+
+</style><title>index</title>
+</head>
+<body class='typora-export os-windows'><div class='typora-export-content'>
+<div id='write'  class=''><h1 id='homework-assignment-1-sudoku-solver'><span>Homework Assignment 1: Sudoku Solver</span></h1><p><span>For this assignment, you are to write a program that solves Sudoku puzzles.</span></p><h2 id='0-contents'><span>0. Contents</span></h2><div class='md-toc' mdtype='toc'><p class="md-toc-content" role="list"><span role="listitem" class="md-toc-item md-toc-h1" data-ref="n0"><a class="md-toc-inner" href="#homework-assignment-1-sudoku-solver">Homework Assignment 1: Sudoku Solver</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n3"><a class="md-toc-inner" href="#0-contents">0. Contents</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n5"><a class="md-toc-inner" href="#1-user-requirements">1. User Requirements</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n32"><a class="md-toc-inner" href="#11-file-format">1.1. File Format</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n36"><a class="md-toc-inner" href="#2-starting-the-assignment">2. Starting the Assignment</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n38"><a class="md-toc-inner" href="#3-user-interface">3. User Interface</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n40"><a class="md-toc-inner" href="#31-initial-gui">3.1. Initial GUI</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n57"><a class="md-toc-inner" href="#32-the-open-puzzle-file-menu-item">3.2. The "Open Puzzle File" Menu Item</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n77"><a class="md-toc-inner" href="#33-the-load-random-puzzle-menu-item">3.3. The "Load Random Puzzle" Menu Item</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n84"><a class="md-toc-inner" href="#34-the-solve-puzzle-menu-item">3.4. The "Solve Puzzle" Menu Item</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n86"><a class="md-toc-inner" href="#35-the-check-solution-menu-item">3.5. The "Check Solution" Menu Item</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n88"><a class="md-toc-inner" href="#36-the-numericupdown">3.6. The NumericUpDown</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n90"><a class="md-toc-inner" href="#4-the-algorithm-to-solve-puzzles">4. The Algorithm to Solve Puzzles</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n128"><a class="md-toc-inner" href="#5-software-architecture">5. Software Architecture</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n142"><a class="md-toc-inner" href="#6-coding-requirements">6. Coding Requirements</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n144"><a class="md-toc-inner" href="#61-the-location-class">6.1. The Location Class</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n152"><a class="md-toc-inner" href="#62-the-potentialconflicts-class">6.2. The PotentialConflicts Class</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n154"><a class="md-toc-inner" href="#621-fields-and-property">6.2.1. Fields and property</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n167"><a class="md-toc-inner" href="#622-a-private-static-method-to-convert-a-char-to-its-index-representation">6.2.2. A private static method to convert a char to its index representation</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n169"><a class="md-toc-inner" href="#623-a-public-setconflict-method">6.2.3. A public SetConflict method </a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n181"><a class="md-toc-inner" href="#624-a-public-createsconflict-method">6.2.4. A public CreatesConflict method</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n191"><a class="md-toc-inner" href="#625-a-public-constructor">6.2.5. A public constructor</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n200"><a class="md-toc-inner" href="#63-the-sudokusolver-class">6.3. The SudokuSolver Class</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n202"><a class="md-toc-inner" href="#631-private-field">6.3.1. private field</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n204"><a class="md-toc-inner" href="#632-the-readfile-method">6.3.2. The ReadFile method</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n208"><a class="md-toc-inner" href="#633-the-getpuzzle-method">6.3.3. The GetPuzzle method</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n211"><a class="md-toc-inner" href="#634-the-solve-method">6.3.4. The Solve method</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n273"><a class="md-toc-inner" href="#635-the-checksolution-method">6.3.5. The CheckSolution method</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n214"><a class="md-toc-inner" href="#7-testing-and-performance">7. Testing and Performance</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n276"><a class="md-toc-inner" href="#71-using-the-unit-test-code">7.1. Using the Unit Test Code</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n281"><a class="md-toc-inner" href="#72-interactive-testing">7.2. Interactive Testing</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n253"><a class="md-toc-inner" href="#8-submitting-your-assignment">8. Submitting Your Assignment</a></span></p></div><h2 id='1-user-requirements'><span>1. User Requirements</span></h2><p><span>Sudoku is a type of puzzle that usually consists of a 9x9 grid in which some cells contain values in the range 1-9; for example:</span></p><p><img src="sudoku-example.png" alt="An example Sudoku puzzle." style="zoom:67%;" /></p><p><span>The goal is to fill in the empty cells with values in the range 1-9 such that:</span></p><ul><li><span>Each row contains exactly one of each value.</span></li><li><span>Each column contains exactly one of each value.</span></li><li><span>Each 3x3 block (outlined with heavier lines in the above figure) contains exactly one of each value.</span></li></ul><p><span>For example, this is a solution for the above puzzle:</span></p><p><img src="sudoku-solution.png" alt="A solution to the above puzzle." style="zoom:67%;" /></p><p><span>We will also consider 4x4 puzzles divided into 4 blocks and using the values 1-4.</span></p><p><span>Your program must be able to:</span></p><ul><li><span>Read a file of Sudoku puzzle descriptions (see </span><a href='#11-file-format'><span>Section 1.1. File Format</span></a><span> below).</span></li><li><span>Allow the user to select a specific or random puzzle from the puzzles read from the file.</span></li><li><span>Allow the user attempt to solve the puzzle.</span></li><li><span>Check a user&#39;s solution.</span></li><li><span>Attempt to solve the selected puzzle (ignoring any values supplied by the user), displaying either the solution or a message indicating that no solution was found.</span></li></ul><p><span>The user interface will be provided to you.</span></p><h3 id='11-file-format'><span>1.1. File Format</span></h3><p><span>Each input file must begin with a line containing either &quot;2&quot; or &quot;3&quot;, giving the number of rows (or columns) in each block of the puzzle. Thus, &quot;2&quot; indicates a 4x4 puzzle (2 rows and columns in each block), and &quot;3&quot; indicates a 9x9 puzzle (3 rows and columns in each block).</span></p><p><span>Each line after the first must then be a string whose length is the number of cells in the puzzle. Thus, if the value on the first line is </span><em><span>b</span></em><span>, the number of rows/columns in the puzzle will be </span><em><span>b</span></em><sup><span>2</span></sup><span>, and the length of each string will be (</span><em><span>b</span></em><sup><span>2</span></sup><span>)</span><sup><span>2</span></sup><span> = </span><em><span>b</span></em><sup><span>4</span></sup><span> (16 for a 4x4 puzzle or 81 for a 9x9 puzzle). This string should contain the values in the puzzle cells, read left-to-right from to to bottom, using &#39;.&#39; to denote an empty cell. For example, the puzzle shown in the first figure above would be encoded by the following line:</span></p><p><code>...81.....2........1.9..7...7..25.934.2............5...975.....563.....4......68.</code></p><h2 id='2-starting-the-assignment'><span>2. Starting the Assignment</span></h2><p><span>Create a GitHub repository using the link provided on the Canvas assignment page. This repository contains part of the code that you will need, including the entire user interface. </span></p><h2 id='3-user-interface'><span>3. User Interface</span></h2><p><span>In what follows, we will describe the intended behavior of the finished program. The user interface itself has been provided for you, but you will need to add code to complete its functionality - see </span><a href='#6-coding-requirements'><span>Section 6. Coding Requirements</span></a><span>.</span></p><h3 id='31-initial-gui'><span>3.1. Initial GUI</span></h3><p><span>When the finished program starts, it should display the following GUI, which is the same as the one displayed by the start code provided:</span></p><p><img src="initial-gui.png" alt="The initial GUI." style="zoom:67%;" /></p><p><span>The &quot;File&quot; menu should contain the following menu items:</span></p><ul><li><span>Open Puzzle File</span></li><li><span>Load Random Puzzle</span></li></ul><p><span>The &quot;Puzzle&quot; menu should contain the following menu items:</span></p><ul><li><span>Solve Puzzle</span></li><li><span>Check Solution</span></li></ul><p><span>The only item in the two menus that should be enabled initially is &quot;Open Puzzle File&quot;. It should be impossible to change the value in the </span><strong><span>NumericUpDown</span></strong><span>. Any value from 1 to 9 may be entered into any of the cells in the puzzle, but all other values should be ignored. </span></p><p><span>To reiterate, the provided start code should exhibit all of the above behavior. Most of the functionality described in the remainder of this section will need to be added (see </span><a href='#6-coding-requirements'><span>Section 6. Coding Requirements</span></a><span>).</span></p><h3 id='32-the-open-puzzle-file-menu-item'><span>3.2. The &quot;Open Puzzle File&quot; Menu Item</span></h3><p><span>Selecting this menu item in either the provided start code or the finished program should cause an </span><strong><span>OpenFileDialog</span></strong><span> to be displayed. If the user closes this dialog without selecting a file, either in the provided start code or the finished program, nothing should change. Selecting a file within the provided start code will cause a </span><strong><span>MessageBox</span></strong><span> displaying a </span><strong><span>NotImplementedException</span></strong><span> to be displayed, and nothing should change. Your finished program, however, should attempt to read the selected file.</span></p><p><span>If the file is successfully read, the following changes should occur within the GUI:</span></p><ul><li><span>The &quot;Load Random Puzzle&quot; and &quot;Solve Puzzle&quot; menu items should be enabled.</span></li><li><span>The value in the </span><strong><span>NumericUpDown</span></strong><span> should be set to 0.</span></li><li><span>The size of the puzzle should be set to the size indicated by the input file.</span></li><li><span>The first puzzle (i.e., puzzle 0) encoded in the input file should be displayed, replacing any values that any puzzle cells may have previously contained. The nonempty cells will be read-only so that their values cannot be changed by the user.</span></li></ul><p><span>If reading the input file throws an exception, this exception should should be displayed in a </span><strong><span>MessageBox</span></strong><span> and nothing should change within the GUI. Your code will need to check for the following error conditions:</span></p><ul><li><span>If the first line of the file contains an integer less than 2 or greater than 3, it should throw an </span><strong><span>IOException</span></strong><span> with the following message: &quot;Invalid block size.&quot;</span></li><li><span>If any line after the first has an incorrect length (see </span><a href='#11-file-format'><span>Section 1.1. File Format</span></a><span>), it should throw an </span><strong><span>IOException</span></strong><span> with a message of the form, &quot;Line </span><em><span>n</span></em><span> has the wrong length.&quot;, where </span><em><span>n</span></em><span> is the line number of the first invalid line. Note that the line giving the block size is line 1; hence, the line containing the first puzzle description is line 2.</span></li><li><span>If any line after the first has a character other than &#39;.&#39; or a valid value for the current puzzle size, it should throw an </span><strong><span>IOException</span></strong><span> with a message of the form, &quot;Line </span><em><span>n</span></em><span> has an invalid character.&quot;, where </span><em><span>n</span></em><span> is the line number of the first invalid line.</span></li></ul><h3 id='33-the-load-random-puzzle-menu-item'><span>3.3. The &quot;Load Random Puzzle&quot; Menu Item</span></h3><p><span>Selecting this menu item should cause the following changes to occur within the GUI:</span></p><ul><li><span>The </span><strong><span>NumericUpDown</span></strong><span> should be set to a random nonnegative value less than the number of puzzles in the currently-loaded file.</span></li><li><span>The puzzle indicated by the value placed into the </span><strong><span>NumericUpDown</span></strong><span> should be displayed, replacing any values that any puzzle cells may have previously contained. The nonempty cells will be read-only so that their values cannot be changed by the user. Note that a value of 0 in the </span><strong><span>NumericUpDown</span></strong><span> refers to the first puzzle in the file, etc.</span></li></ul><h3 id='34-the-solve-puzzle-menu-item'><span>3.4. The &quot;Solve Puzzle&quot; Menu Item</span></h3><p><span>Selecting this menu item should first cause the program to try to find a solution to the puzzle, disregarding any values that may have been entered by the user. If a solution is found, it should be placed into the puzzle, leaving the cells containing initial puzzle values as read-only. If no solution is found, it should display a </span><strong><span>MessageBox</span></strong><span> containing the message, &quot;The puzzle has no solution&quot;, and the GUI should display the original puzzle.</span></p><h3 id='35-the-check-solution-menu-item'><span>3.5. The &quot;Check Solution&quot; Menu Item</span></h3><p><span>This menu item should only be enabled when all the cells in the puzzle are filled. Clicking this menu item should cause the program to determine whether the values in the cells constitute a solution to the puzzle. If so, it should display a </span><strong><span>MessageBox</span></strong><span> containing the message, &quot;The puzzle is correctly solved.&quot; Otherwise, it should display a </span><strong><span>MessageBox</span></strong><span> containing the message, &quot;The puzzle is NOT solved.&quot;</span></p><h3 id='36-the-numericupdown'><span>3.6. The NumericUpDown</span></h3><p><span>After a puzzle file has been loaded successfully, the range of the </span><strong><span>NumericUpDown</span></strong><span> should be all nonnegative integers less than the number of puzzles in the file. Selecting one of these values should cause the corresponding puzzle to be loaded, as if this value had been randomly chosen by the &quot;Load Random Puzzle&quot; menu item.</span></p><h2 id='4-the-algorithm-to-solve-puzzles'><span>4. The Algorithm to Solve Puzzles</span></h2><p><span>Before we discuss any program structure, we need to describe the algorithm to be used to solve the puzzles. This algorithm is an exhaustive search using backtracking. It will proceed through the cells of the puzzle row by row, attempting to fill each empty cell with a valid value. If this is impossible, the algorithm will </span><em><span>backtrack</span></em><span> by undoing the most recent guess and continuing from there, as if the undone guess were an invalid value.</span></p><p><span>In order to facilitate backtracking, the algorithm will use a stack to store the locations it has filled with values. This stack will </span><em><span>not</span></em><span> include locations containing fixed values provided in the given puzzle; hence, it will initially be empty. Because stack accesses are LIFO, it will always be able to undo the most recent guess.</span></p><p><span>Besides the stack, the algorithm uses the following values to keep track of where it is currently working:</span></p><ul><li><span>The current row, initially 0.</span></li><li><span>The current column, initially 0.</span></li><li><span>The current guess, initially the smallest value that can be placed in a puzzle cell (this is always be &#39;1&#39;).</span></li></ul><p><span>The algorithm then iterates as long as the current row is less than the number of rows in the puzzle. On each iteration:</span></p><ul><li><p><span>If the current column is greater than or equal to the number of columns in the puzzle, increment the current row and set the current column to 0.</span></p></li><li><p><span>Otherwise, if the puzzle has a nonempty cell at the current row and column, increment the current column. </span></p></li><li><p><span>Otherwise, if the current guess is larger than the maximum value that can be placed in a puzzle cell, then backtrack:</span></p><ul><li><p><span>If the stack is empty, backtracking is impossible; hence, return, indicating that the puzzle has no solution.</span></p></li><li><p><span>Otherwise:</span></p><ul><li><span>Remove the top location from the stack, and set the current row and column to this location.</span></li><li><span>Set the current guess to the puzzle value stored in this location.</span></li><li><span>Remove the puzzle value stored in this location.</span></li><li><span>Increment the current guess.</span></li></ul></li></ul></li><li><p><span>Otherwise, if the current guess cannot legally be placed in the puzzle at the current row and column, increment the current guess.</span></p></li><li><p><span>Otherwise, place the current guess into the puzzle at the current row and column, push this location onto the stack, increment the current column, and set the current guess to its minimum value.</span></p></li></ul><p><span>If the above loop completes without returning, the puzzle has been solved.</span></p><h2 id='5-software-architecture'><span>5. Software Architecture</span></h2><p><span>The following class diagram shows the software architecture for the program:</span></p><p><img src="ClassDiagram.png" alt="The software architecture." style="zoom:67%;" /></p><p><span>The </span><strong><span>UserInterface</span></strong><span> class implements the GUI. You will not need to modify it or use it in your code. </span><strong><span>Utilities</span></strong><span> is a </span><strong><span>static</span></strong><span> class (i.e., all of its members are </span><strong><span>static</span></strong><span>) provided for you. You will not need to modify this class, but you will need to use some of its members, which are explained below. You will need to add both the </span><strong><span>Location</span></strong><span> and the </span><strong><span>PotentialConflicts</span></strong><span> classes and implement them in their entirety. </span><strong><span>Location</span></strong><span> is an immutable class whose instances represent locations within the puzzle. </span><strong><span>PotentialConflicts</span></strong><span> is a class whose instances represent potential conflicts within a puzzle being solved. You will need to use this class to help you determine whether individual guesses are valid. </span><strong><span>SudokuSolver</span></strong><span> is a </span><strong><span>static</span></strong><span> class that contains the code for reading puzzle files and solving puzzles. A skeleton of this class has been provided, but you will need to fill in most of its code.</span></p><p><span>Details of the code you must provide are given in </span><a href='#6-coding-requirements'><span>Section 6. Coding Requirements</span></a><span>. The </span><strong><span>Utilites</span></strong><span> class contains the following </span><strong><span>public static</span></strong><span> members available for your use:</span></p><ul><li><span>A </span><strong><span>readonly int</span></strong><span> </span><code>MinBlockSize</code><span> giving the minimum number of rows/columns in a single block within a puzzle.</span></li><li><span>A </span><strong><span>readonly int</span></strong><span> </span><code>MaxBlockSize</code><span> giving the maximum number of rows/columns in a single block within a puzzle.</span></li><li><span>A </span><strong><span>readonly char</span></strong><span> </span><code>MinNumber</code><span> giving the minimum value that can be placed within a cell in a puzzle.</span></li><li><span>A method </span><strong><span>GetBlock</span></strong><span> that takes as its parameters three </span><strong><span>int</span></strong><span>s giving a row of the puzzle, a column of the puzzle, and the number of row/columns within the block, and returns an </span><strong><span>int</span></strong><span> identifying the block in which the given location occurs. The values identifying blocks start at 0 for the block in the upper left corner, and increase first from left to right, then from top to bottom. Hence, the second block on the first row is block 1, etc.</span></li></ul><h2 id='6-coding-requirements'><span>6. Coding Requirements</span></h2><p><span>In this section, we give the coding requirements for each of the classes that you will need to provide or modify in the above class diagram. In most cases, you do not need to use the names for </span><strong><span>private</span></strong><span> members shown in the diagram as long as you follow the </span><a href='https://cis300.cs.ksu.edu/appendix/style/naming/'><span>naming conventions</span></a><span>; however, you must use all of the names shown for </span><strong><span>public</span></strong><span> members, as failing to do so might introduce syntax errors in the provided start code. As you write your code, avoid using specific literal values like 2 or &#39;1&#39;. Instead, use constants defined either in the </span><strong><span>Utilities</span></strong><span> class or in classes that you write.</span></p><h3 id='61-the-location-class'><span>6.1. The Location Class</span></h3><p><span>To add this class:</span></p><ol><li><span>In the Solution Explorer, right-click on the project name (in bold face).</span></li><li><span>Select &quot;Add -</span><span>&gt;</span><span> Class...&quot;.</span></li><li><span>Replace the &quot;Name&quot; field at the bottom of the resulting dialog with &quot;Location.cs&quot;.</span></li><li><span>In the </span><strong><span>class</span></strong><span> statement of the resulting file, replace &quot;</span><strong><span>internal</span></strong><span>&quot; with &quot;</span><strong><span>public</span></strong><span>&quot;.</span></li></ol><p><span>This class needs the following </span><strong><span>public</span></strong><span> properties, each implemented using the default implementation:</span></p><ul><li><span>A </span><strong><span>Row</span></strong><span> property that gets an </span><strong><span>int</span></strong><span> giving the row of the location. It should not have a </span><strong><span>set</span></strong><span> accessor.</span></li><li><span>A </span><strong><span>Column</span></strong><span> property that gets an </span><strong><span>int</span></strong><span> giving the column of the location. It should not have a </span><strong><span>set</span></strong><span> accessor.</span></li></ul><p><span>This class also needs a </span><strong><span>public</span></strong><span> constructor that takes two </span><strong><span>int</span></strong><span> parameters and uses them to initialize the above properties.</span></p><h3 id='62-the-potentialconflicts-class'><span>6.2. The PotentialConflicts Class</span></h3><p><span>You will need to add this class in the same way that you added the </span><strong><span>Location</span></strong><span> class. This class will need four </span><strong><span>private</span></strong><span> fields, one </span><strong><span>public</span></strong><span> property, a </span><strong><span>public</span></strong><span> constructor, one </span><strong><span>private</span></strong><span> method, and two </span><strong><span>public</span></strong><span> methods. These are all described in what follows.</span></p><h4 id='621-fields-and-property'><span>6.2.1. Fields and property</span></h4><p><span>Instances of this class will be used to record potential conflicts - the values already stored in each row, column, and block. To record this information it will use three 2-dimensional arrays of </span><strong><span>bool</span></strong><span>s - arrays indexed using two indices, separated by a comma. The first index will indicate a row, column, or block number. The second index will be an </span><strong><span>int</span></strong><span> representing one of the puzzle values as follows: the </span><strong><span>char</span></strong><span> value </span><code>c</code><span> will be represented by </span><code>c - Utilities.MinNumber</code><span>. For example, the puzzle value &#39;2&#39; will be represented by the index 1. Note that this </span><strong><span>int</span></strong><span> representation of puzzle values will only be used internally within this class - elsewhere, puzzle values will be represented by either </span><strong><span>char</span></strong><span>s (&#39;1&#39;, &#39;2&#39;, etc.) or </span><strong><span>string</span></strong><span>s (&quot;1&quot;, &quot;2&quot;, etc.). Thus, each of these arrays will be </span><em><span>n</span></em><span>x</span><em><span>n</span></em><span>, where </span><em><span>n</span></em><span> is the number of rows/columns in the puzzle.</span></p><p><span>This class will need the following </span><strong><span>private</span></strong><span> fields:</span></p><ul><li><span>A </span><strong><span>bool[</span>&nbsp;<span>,</span>&nbsp;<span>]</span></strong><span> such that element [</span><em><span>i</span></em><span>, </span><em><span>k</span></em><span>] indicates whether row </span><em><span>i</span></em><span> contains the puzzle value represented by </span><em><span>k</span></em><span>, as described above.</span></li><li><span>A </span><strong><span>bool[</span>&nbsp;<span>,</span>&nbsp;<span>]</span></strong><span> such that element [</span><em><span>j</span></em><span>, </span><em><span>k</span></em><span>] indicates whether column </span><em><span>j</span></em><span> contains the puzzle value represented by </span><em><span>k</span></em><span>.</span></li><li><span>A </span><strong><span>bool[</span>&nbsp;<span>,</span>&nbsp;<span>]</span></strong><span> such that element [</span><em><span>b</span></em><span>, </span><em><span>k</span></em><span>] indicates whether block </span><em><span>b</span></em><span> contains the puzzle value represented by </span><em><span>k</span></em><span>, where </span><em><span>b</span></em><span> is the value computed by </span><strong><span>Utilities.GetBlock</span></strong><span>.</span></li><li><span>An </span><strong><span>int</span></strong><span> giving the number of rows/columns within a single block of the puzzle.</span></li></ul><p><span>It also needs a </span><strong><span>public</span></strong><span> </span><strong><span>HasConflict</span></strong><span> property that gets a </span><strong><span>bool</span></strong><span> indicating whether the puzzle passed to the constructor (see below) contains any conflicts - rows, columns, or blocks that contain more than one occurrence of any value. Use the default implementation with no </span><strong><span>set</span></strong><span> accessor.</span></p><h4 id='622-a-private-static-method-to-convert-a-char-to-its-index-representation'><span>6.2.2. A private static method to convert a char to its index representation</span></h4><p><span>This method should take as its only parameter a </span><strong><span>char</span></strong><span> giving a puzzle value. It should return an </span><strong><span>int</span></strong><span> giving the index that should be used to represent this character when indexing into one of the three </span><strong><span>bool[</span>&nbsp;<span>,</span>&nbsp;<span>]</span></strong><span>s - see the first paragraph of </span><a href='#621-fields-and-property'><span>Section 6.2.1. Fields and property</span></a><span>.</span></p><h4 id='623-a-public-setconflict-method'><span>6.2.3. A public SetConflict method </span></h4><p><span>This method should take the following parameters:</span></p><ul><li><span>An </span><strong><span>int</span></strong><span> giving the row of a puzzle cell.</span></li><li><span>An </span><strong><span>int</span></strong><span> giving the column of a puzzle cell.</span></li><li><span>A </span><strong><span>char</span></strong><span> giving the value to be placed in this cell.</span></li><li><span>A </span><strong><span>bool</span></strong><span> that will be </span><strong><span>true</span></strong><span> if the potential conflict is to be added or </span><strong><span>false</span></strong><span> if it is to be removed.</span></li></ul><p><span>It should return nothing. It needs to store the given </span><strong><span>bool</span></strong><span> in the appropriate locations of each of the three </span><strong><span>bool[</span>&nbsp;<span>,</span>&nbsp;<span>]</span></strong><span>s. Use the above method to obtain the second index to use for each of these arrays.</span></p><h4 id='624-a-public-createsconflict-method'><span>6.2.4. A public CreatesConflict method</span></h4><p><span>This method should take the following parameters:</span></p><ul><li><span>An </span><strong><span>int</span></strong><span> giving the row of a puzzle cell.</span></li><li><span>An </span><strong><span>int</span></strong><span> giving the column of a puzzle cell.</span></li><li><span>A </span><strong><span>char</span></strong><span> giving the value to be placed in this cell.</span></li></ul><p><span>It should return a </span><strong><span>bool</span></strong><span> indicating whether placing </span></p><h4 id='625-a-public-constructor'><span>6.2.5. A public constructor</span></h4><p><span>This constructor will need the following parameters:</span></p><ul><li><span>A </span><strong><span>string[</span>&nbsp;&nbsp;<span>]</span></strong><span> giving the puzzle.</span></li><li><span>An </span><strong><span>int</span></strong><span> giving the number of rows/columns in a single block of the puzzle.</span></li></ul><p><span>First, make sure the </span><strong><span>string[</span>&nbsp;<span>]</span></strong><span> is not </span><strong><span>null</span></strong><span> - if it is, throw an </span><strong><span>ArgumentNullException</span></strong><span>. You do </span><em><span>not</span></em><span> need to check that it is the proper size.</span></p><p><span>You will then need to use the parameters to initialize all four </span><strong><span>private</span></strong><span> fields and the </span><strong><span>public</span></strong><span> property. To initialize the arrays, you will first need to compute the number of rows/columns in the puzzle and initialize each array to a new instance of that size. </span></p><p><span>To complete the initialization, you will need to iterate through the puzzle. For each nonempty puzzle location, first check to see if the value in that location introduces a conflict (use the appropriate method above). If so, record that the puzzle has a conflict by setting the property to </span><strong><span>true</span></strong><span>. Then regardless of whether a conflict already exists, use the appropriate method above to record the potential conflicts that the value in this location introduces.</span></p><h3 id='63-the-sudokusolver-class'><span>6.3. The SudokuSolver Class</span></h3><p><span>This class needs to be </span><strong><span>static</span></strong><span>. As a result, each field and method also needs to be </span><strong><span>static</span></strong><span>. A method stub has been provided for each method. In addition, you will need to add a </span><strong><span>private</span></strong><span> field. We describe each of these members in what follows.</span></p><h4 id='631-private-field'><span>6.3.1. private field</span></h4><p><span>This class needs a </span><strong><span>private static readonly char</span></strong><span> field to record the character used to represent an empty cell within a line of an input file. This character should be </span><code>&#39;.&#39;</code><span>.</span></p><h4 id='632-the-readfile-method'><span>6.3.2. The ReadFile method</span></h4><p><span>You will need to replace the </span><strong><span>throw</span></strong><span> with code that reads the given file, checks for the error conditions described in </span><a href='#32-the-open-puzzle-file-menu-item'><span>Section 3.2. The &quot;Open Puzzle File&quot; Menu Item</span></a><span>, and if no exception is thrown, returns the contents of the file read. </span></p><p><span>Instead of using </span><strong><span>File.ReadAllText</span></strong><span> to read the file, use </span><a href='https://learn.microsoft.com/en-us/dotnet/api/system.io.file.readalllines?view=net-6.0#system-io-file-readalllines(system-string)'><strong><span>File.ReadAllLines</span></strong></a><span>. This method works the same as </span><strong><span>File.ReadAllText</span></strong><span>, but instead of returning the file contents as a single </span><strong><span>string</span></strong><span>, it returns a </span><strong><span>string[</span>&nbsp;<span>]</span></strong><span> whose elements are the individual lines of the file. Obtain the number of rows/columns in a single block of the puzzles from the first element of this </span><strong><span>string[</span>&nbsp;<span>]</span></strong><span>. Check that this value is within the range specified by the constants defined in the </span><strong><span>Utilities</span></strong><span> class - if not, throw the appropriate exception as described in </span><a href='#32-the-open-puzzle-file-menu-item'><span>Section 3.2. The &quot;Open Puzzle File&quot; Menu Item</span></a><span>. Note that you can include a message string within an </span><strong><span>IOException</span></strong><span> by passing it as the only parameter to the </span><a href='https://learn.microsoft.com/en-us/dotnet/api/system.io.ioexception.-ctor?view=net-6.0#system-io-ioexception-ctor(system-string)'><strong><span>IOException</span></strong><span> constructor</span></a><span>.</span></p><p><span>Then iterate through the remaining elements of the </span><strong><span>string[</span>&nbsp;<span>]</span></strong><span> (i.e., all elements after the first). Check that the length of each of these strings is the correct length for the number of rows/columns in a block (see </span><a href='#11-file-format'><span>Section 1.1. File Format</span></a><span>). Don&#39;t use the </span><strong><span>Math.Pow</span></strong><span> method to raise a value to a power; instead, multiply the value by itself the appropriate number of times. If the length of a </span><strong><span>string</span></strong><span> is incorrect, throw the appropriate exception described in </span><a href='#32-the-open-puzzle-file-menu-item'><span>Section 3.2. The &quot;Open Puzzle File&quot; Menu Item</span></a><span>. Note that line 1 of the file is stored in array location 0; hence, you will need to compute a line number from an array index. Once you&#39;ve verified that a string has the correct length, check that each character in the string is either the character representing an empty cell or is a valid value for a cell within this puzzle. Use the constants defined in the </span><strong><span>Utilities</span></strong><span> class to do this check. If a character is invalid, throw the appropriate exception.</span></p><h4 id='633-the-getpuzzle-method'><span>6.3.3. The GetPuzzle method</span></h4><p><span>This method should return the puzzle described by the given </span><strong><span>string</span></strong><span>. The array returned should have </span><code>size</code><span> rows and columns. The element in row </span><em><span>i</span></em><span> and column </span><em><span>j</span></em><span> should contain the empty string if the puzzle has no value assigned to the cell at this location; otherwise, it should contain the value assigned to the cell at this location. Note that each value is a </span><strong><span>string</span></strong><span>; hence, the values stored will need to be </span><strong><span>string</span></strong><span>s such as &quot;1&quot;, &quot;2&quot;, etc.</span></p><p><span>You may assume that the given </span><strong><span>string</span></strong><span> has the correct length (i.e., </span><code>size</code><sup><span>2</span></sup><span>) and contains no invalid characters. After constructing an array of the appropriate size, set up nested loops to iterate through it. The outer loop should iterate through the rows, and the inner loop should iterate through the columns. Iterating in this way will visit the locations of the array in the same order as stepping through the given </span><strong><span>string</span></strong><span> from left to right. At each location, store the proper value.</span></p><h4 id='634-the-solve-method'><span>6.3.4. The Solve method</span></h4><p><span>This method should attempt to solve the puzzle given in the </span><strong><span>string[</span>&nbsp;<span>,</span>&nbsp;<span>]</span></strong><span>. If it finds a solution, it should return </span><strong><span>true</span></strong><span>, and the array should contain the solution when the method returns. Otherwise, it should return </span><strong><span>false</span></strong><span>, and the contents of the array should be unchanged when the method returns. You may assume that the array has </span><code>blockSize</code><sup><span>2</span></sup><span> rows and columns and contains only valid values, as described in </span><a href='#633-the-getpuzzle-method'><span>Section 6.3.3. The </span><strong><span>GetPuzzle</span></strong><span> method</span></a><span>.</span></p><p><span>First, construct a </span><strong><span>PotentialConflicts</span></strong><span> from the given puzzle. Then check the </span><strong><span>PotentialConflicts</span></strong><span> to see if it already has a conflict - if so, the puzzle has no solution. Otherwise, implement the algorithm described in </span><a href='#4-the-algorithm-to-solve-puzzles'><span>Section 4. The Algorithm to Solve Puzzles</span></a><span>. Be sure to update the </span><strong><span>PotentialConflicts</span></strong><span> whenever you change a value in the array and to use the </span><strong><span>PotentialConflicts</span></strong><span> to determine whether setting a location to a particular value would introduce a conflict.</span></p><h4 id='635-the-checksolution-method'><span>6.3.5. The CheckSolution method</span></h4><p><span>This method should determine whether the given puzzle is solved correctly. You may assume that all of its cells are filled with values. You can simply construct a </span><strong><span>PotentialConflicts</span></strong><span> from the given puzzle and return whether the puzzle contains no conflicts.</span></p><h2 id='7-testing-and-performance'><span>7. Testing and Performance</span></h2><p><span>Unit test code has been provided to test your </span><strong><span>Location</span></strong><span> and </span><strong><span>PotentialConflicts</span></strong><span> classes and part of your </span><strong><span>SudokuSolver</span></strong><span> class. The unit test code does </span><em><span>not</span></em><span> test your </span><strong><span>SudokuSolver.ReadFile</span></strong><span> method - you will need to test it interactively. Hints for using the unit test code for debugging and guidance for interactive testing are described in what follows.</span></p><h3 id='71-using-the-unit-test-code'><span>7.1. Using the Unit Test Code</span></h3><p><span>In the Test Explorer, click on the &quot;Group By&quot; icon, and make sure &quot;Class&quot; is checked. Then uncheck any other items in the list, and finally, check &quot;Traits&quot;. This will cause the tests to be grouped first by class (which will correspond to the class being tested), then by traits (or categories). After doing this, click on the main window, and make sure that the arrow on the &quot;Test&quot; column is pointing upwards - if it isn&#39;t, click on &quot;Test&quot; to reverse its direction. This will cause the tests to be listed in the proper order so that working through them from top down will correct the more basic issues first.</span></p><p><span>When debugging a failed test, pay attention to all of the information in the Test Detail Summary window for that test. This should tell you what went wrong. You will usually then need to look at the unit test code and its comments to see exactly what was tested. To get to the unit test code, double-click the test in the Test Explorer. If a test throws an exception, it is usually useful to right-click on the test and select &quot;Debug&quot;. This will run the debugger on the test and break the program execution where the exception is thrown. Once all the unit tests for a class have passed, you can be reasonably confident of that class&#39;s correctness (although this isn&#39;t guaranteed).</span></p><p><span>The test, </span><strong><span>TestSolve9By9</span></strong><span>, (in </span><strong><span>SudokuSolverTests</span></strong><span>) will take longer than the other tests, but it shouldn&#39;t time out. This test is the main performance measure for your code. The time it takes for you will depend on the speed of your machine, but for comparison purposes, it usually takes 1-1.1 seconds on my notebook. </span></p><p><span>If you find that running all of the tests takes too long, you can run a single test by right-clicking it and selecting &quot;Run&quot;. You can run all of the tests in a class or category by right-clicking the class/category and selecting &quot;Run&quot;.</span></p><h3 id='72-interactive-testing'><span>7.2. Interactive Testing</span></h3><p><span>Once the unit tests all pass, you will need to test your </span><strong><span>SudokuSolver.ReadFile</span></strong><span> method interactively. A ZIP archive, </span><strong><span>data.zip</span></strong><span> has been posted on Canvas for this purpose. Download and decompress this archive, but do </span><em><span>not</span></em><span> place it in your repository - it will make your repository too large. The following files should load without throwing exceptions, resulting in the first puzzle from the file being displayed:</span></p><ul><li><strong><span>no-solution.txt</span></strong><span>: A single unsolvable 4x4 puzzle.</span></li><li><strong><span>sudoku-4x4.txt</span></strong><span>: 4 solvable 4x4 puzzles.</span></li><li><strong><span>sudoku-9x9-easy.txt</span></strong><span>: 452,643 solvable 9x9 puzzles.</span></li><li><strong><span>sudoku-9x9-hard.txt:</span></strong><span> 528,012 solvable 9x9 puzzles.</span></li></ul><p><span>Trying to solve the puzzle in the first file above should result in a </span><strong><span>MessageBox</span></strong><span> displaying the message, &quot;The puzzle has no solution.&quot; Trying to solve any other puzzle should result in a solution being displayed. Checking a solved puzzle should result in a </span><strong><span>MessageBox</span></strong><span> displaying the message, &quot;The puzzle is correctly solved.&quot; If you edit a solution so that it is no longer correct, then try to check it, a </span><strong><span>MessageBox</span></strong><span> displaying the message, &quot;The puzzle is NOT solved.&quot; should be displayed.</span></p><p><span>The remaining files contain errors. Loading each of them should result in a </span><strong><span>MessageBox</span></strong><span> displaying an </span><strong><span>IOException</span></strong><span> containing the message indicated next to the file name in the list below. Any previously-loaded file should remain loaded.</span></p><ul><li><strong><span>bad-puzzle-length1.txt</span></strong><span>: &quot;Line 3 has the wrong length.&quot;</span></li><li><strong><span>bad-puzzle-length2.txt</span></strong><span>: &quot;Line 4 has the wrong length.&quot;</span></li><li><strong><span>bad-puzzle-length3.txt</span></strong><span>: &quot;Line 3 has the wrong length.&quot;</span></li><li><strong><span>bad-puzzle-length4.txt</span></strong><span>: &quot;Line 2 has the wrong length.&quot;</span></li><li><strong><span>bad-value-1.txt</span></strong><span>: &quot;Line 4 has an invalid character.&quot;</span></li><li><strong><span>bad-value-2.txt</span></strong><span>: &quot;Line 2 has an invalid character.&quot;</span></li><li><strong><span>bad-value-3.txt</span></strong><span>: &quot;Line 3 has an invalid character.&quot;</span></li><li><strong><span>bad-value-4.txt</span></strong><span>: &quot;Line 5 has an invalid character.&quot;</span></li><li><strong><span>blocksize-1.txt</span></strong><span>: &quot;Invalid block size.&quot;</span></li><li><strong><span>blocksize-4.txt</span></strong><span>: &quot;Invalid block size.&quot;</span></li></ul><h2 id='8-submitting-your-assignment'><span>8. Submitting Your Assignment</span></h2><p><span>Be sure to </span><strong><span>commit</span></strong><span> all your changes, then </span><strong><span>push</span></strong><span> your commits to your GitHub repository. Make sure the </span><strong><span>Ksu.Cis300.Sudoku</span></strong><span> folder in your repository contains all seven .cs files, as we can only grade what is present in the repository. Then submit the </span><em><span>entire URL</span></em><span> of the commit that you want graded. </span></p><p><strong><span>Note:</span></strong><span> The repositories for the homework assignments for this class are set up to use GithHub&#39;s autograding feature to track push times. No actual testing/grading is done, but after each push, the GitHub page for the repository will show a green check mark on the line indicating the latest commit. Clicking that check mark will display a popup indicating that all checks have passed, regardless of whether your program works. You may also get an email indicating that all checks have passed. The only purpose for using the autograding feature in this way is to give us a backup indication of your push times in case you submitted your assignment incorrectly.</span></p></div></div>
+</body>
+</html>
