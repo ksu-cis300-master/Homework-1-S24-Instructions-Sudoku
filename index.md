@@ -38,13 +38,13 @@ The user interface will be provided to you.
 
 Each input file must begin with a line containing either "2" or "3", giving the number of rows (or columns) in each block of the puzzle. Thus, "2" indicates a 4x4 puzzle (2 rows and columns in each block), and "3" indicates a 9x9 puzzle (3 rows and columns in each block).
 
-Each line after the first must then be a string whose length is the number of cells in the puzzle. Thus, if the value on the first line is *b*, the number of rows/columns in the puzzle will be *b*<sup>2</sup>, and the length of each string will be (*b*<sup>2</sup>)<sup>2</sup> = *b*<sup>4</sup> (16 for a 4x4 puzzle or 81 for a 9x9 puzzle). This string should contain the values in the puzzle cells, read left-to-right from to to bottom, using '.' to denote an empty cell. For example, the puzzle shown in the first figure above would be encoded by the following line:
+Each line after the first must then be a string whose length is the number of cells in the puzzle. Thus, if the value on the first line is *b*, the number of rows/columns in the puzzle will be *b*<sup>2</sup>, and the length of each input line (after the first) will be (*b*<sup>2</sup>)<sup>2</sup> = *b*<sup>4</sup> (16 for a 4x4 puzzle or 81 for a 9x9 puzzle). This string should contain the values in the puzzle cells, read left-to-right from top to bottom, using '.' to denote an empty cell. For example, the puzzle shown in the first figure above would be encoded by the following line:
 
 `...81.....2........1.9..7...7..25.934.2............5...975.....563.....4......68.`
 
 ## 2. Starting the Assignment
 
-Create a GitHub repository using the link provided on the Canvas assignment page. This repository contains part of the code that you will need, including the entire user interface. 
+Create a GitHub repository using the link provided on the Canvas assignment page. This repository contains part of the code that you will need, including the entire user interface. It also contains a unit test project, **Ksu.Cis300.Sudoku.Tests**, that you can use to test most of your code.
 
 ## 3. User Interface
 
@@ -110,18 +110,18 @@ After a puzzle file has been loaded successfully, the range of the **NumericUpDo
 
 Before we discuss any program structure, we need to describe the algorithm to be used to solve the puzzles. This algorithm is an exhaustive search using backtracking. It will proceed through the cells of the puzzle row by row, attempting to fill each empty cell with a valid value. If this is impossible, the algorithm will *backtrack* by undoing the most recent guess and continuing from there, as if the undone guess were an invalid value.
 
-In order to facilitate backtracking, the algorithm will use a stack to store the locations it has filled with values. This stack will *not* include locations containing fixed values provided in the given puzzle; hence, it will initially be empty. Because stack accesses are LIFO, it will always be able to undo the most recent guess.
+In order to facilitate backtracking, the algorithm will use a stack to store the locations it has filled with values. This stack will *not* include locations containing fixed values provided in the given puzzle; hence, it will initially be empty. Because stack accesses are LIFO, the algorithm will always be able to undo the most recent guess.
 
 Besides the stack, the algorithm uses the following values to keep track of where it is currently working:
 
 - The current row, initially 0.
 - The current column, initially 0.
-- The current guess, initially the smallest value that can be placed in a puzzle cell (this is always be '1').
+- The current guess, initially the smallest value that can be placed in a puzzle cell (this will always be '1').
 
 The algorithm then iterates as long as the current row is less than the number of rows in the puzzle. On each iteration:
 
-- If the current column is greater than or equal to the number of columns in the puzzle, increment the current row and set the current column to 0.
-- Otherwise, if the puzzle has a nonempty cell at the current row and column, increment the current column. 
+- If the current column is greater than or equal to the number of columns in the puzzle, go to the beginning of the next row by incrementing the current row and setting the current column to 0.
+- Otherwise, if the puzzle has a nonempty cell at the current row and column, go to the next column by incrementing the current column. 
 - Otherwise, if the current guess is larger than the maximum value that can be placed in a puzzle cell, then backtrack:
   - If the stack is empty, backtracking is impossible; hence, return, indicating that the puzzle has no solution.
   - Otherwise:
@@ -147,11 +147,11 @@ Details of the code you must provide are given in [Section 6. Coding Requirement
 - A **readonly int** `MinBlockSize` giving the minimum number of rows/columns in a single block within a puzzle.
 - A **readonly int** `MaxBlockSize` giving the maximum number of rows/columns in a single block within a puzzle.
 - A **readonly char** `MinNumber` giving the minimum value that can be placed within a cell in a puzzle.
-- A method **GetBlock** that takes as its parameters three **int**s giving a row of the puzzle, a column of the puzzle, and the number of row/columns within the block, and returns an **int** identifying the block in which the given location occurs. The values identifying blocks start at 0 for the block in the upper left corner, and increase first from left to right, then from top to bottom. Hence, the second block on the first row is block 1, etc.
+- A method **GetBlock** that takes as its parameters three **int**s giving a row of the puzzle, a column of the puzzle, and the number of row/columns within each block, and returns an **int** identifying the block in which the given location occurs. The values identifying blocks start at 0 for the block in the upper left corner, and increase first from left to right, then from top to bottom. Hence, the second block on the first row is block 1, etc.
 
 ## 6. Coding Requirements
 
-In this section, we give the coding requirements for each of the classes that you will need to provide or modify in the above class diagram. In most cases, you do not need to use the names for **private** members shown in the diagram as long as you follow the [naming conventions](https://cis300.cs.ksu.edu/appendix/style/naming/); however, you must use all of the names shown for **public** members, as failing to do so might introduce syntax errors in the provided start code. As you write your code, avoid using specific literal values like 2 or '1'. Instead, use constants defined either in the **Utilities** class or in classes that you write.
+In this section, we give the coding requirements for each of the classes that you will need to provide or modify in the above class diagram. You do not need to use the names for **private** members shown in the diagram as long as you follow the [naming conventions](https://cis300.cs.ksu.edu/appendix/style/naming/); however, you must use all of the names shown for **public** members, as failing to do so might introduce syntax errors in the provided start code. As you write your code, avoid using specific literal values like 2 or '1'. Instead, use constants defined either in the **Utilities** class or in classes that you write. Also, don't use the **Math.Pow** method to raise a value to an integer power. Instead, multiply the integer by itself the appropriate number of times.
 
 ### 6.1. The Location Class
 
@@ -175,7 +175,7 @@ You will need to add this class in the same way that you added the **Location** 
 
 #### 6.2.1. Fields and property
 
-Instances of this class will be used to record potential conflicts - the values already stored in each row, column, and block. To record this information it will use three 2-dimensional arrays of **bool**s - arrays indexed using two indices, separated by a comma. The first index will indicate a row, column, or block number. The second index will be an **int** representing one of the puzzle values as follows: the **char** value `c` will be represented by `c - Utilities.MinNumber`. For example, the puzzle value '2' will be represented by the index 1. Note that this **int** representation of puzzle values will only be used internally within this class - elsewhere, puzzle values will be represented by either **char**s ('1', '2', etc.) or **string**s ("1", "2", etc.). Thus, each of these arrays will be *n*x*n*, where *n* is the number of rows/columns in the puzzle.
+Instances of this class will be used to record potential conflicts - the values already stored in each row, column, and block. To record this information it will use three 2-dimensional arrays of **bool**s - arrays indexed using two indices, separated by a comma. The first index will indicate a row, column, or block number. The second index will be an **int** representing one of the puzzle values as follows: the **char** value `c` will be represented by `c - Utilities.MinNumber`. For example, the puzzle value '2' will be represented by the **int** 1. Note that this **int** representation of puzzle values will only be used internally within this class - elsewhere, puzzle values will be represented by either **char**s ('1', '2', etc.) or **string**s ("1", "2", etc.). Thus, each of these arrays will be *n*x*n*, where *n* is the number of rows/columns in the puzzle.
 
 This class will need the following **private** fields:
 
@@ -186,7 +186,7 @@ This class will need the following **private** fields:
 
 It also needs a **public** **HasConflict** property that gets a **bool** indicating whether the puzzle passed to the constructor (see below) contains any conflicts - rows, columns, or blocks that contain more than one occurrence of any value. Use the default implementation with no **set** accessor.
 
-#### 6.2.2. A private static method to convert a char to its index representation
+#### 6.2.2. A private static method to convert a char to its int representation
 
 This method should take as its only parameter a **char** giving a puzzle value. It should return an **int** giving the index that should be used to represent this character when indexing into one of the three **bool[&nbsp;,&nbsp;]**s - see the first paragraph of [Section 6.2.1. Fields and property](#621-fields-and-property).
 
@@ -209,16 +209,16 @@ This method should take the following parameters:
 - An **int** giving the column of a puzzle cell.
 - A **char** giving the value to be placed in this cell.
 
-It should return a **bool** indicating whether placing 
+It should return a **bool** indicating whether placing the given **char** at the given location would create a conflict; i.e., whether the given **char** already occurs within the same row, column, or block. You should be able to determine this by looking up one location in each of the three arrays.
 
 #### 6.2.5. A public constructor
 
 This constructor will need the following parameters:
 
-- A **string[&nbsp;&nbsp;]** giving the puzzle.
+- A **string[&nbsp;,&nbsp;]** giving the puzzle.
 - An **int** giving the number of rows/columns in a single block of the puzzle.
 
-First, make sure the **string[&nbsp;]** is not **null** - if it is, throw an **ArgumentNullException**. You do *not* need to check that it is the proper size.
+First, make sure the **string[&nbsp;,&nbsp;]** is not **null** - if it is, throw an **ArgumentNullException**. You do *not* need to check that it is the proper size.
 
 You will then need to use the parameters to initialize all four **private** fields and the **public** property. To initialize the arrays, you will first need to compute the number of rows/columns in the puzzle and initialize each array to a new instance of that size. 
 
@@ -226,7 +226,7 @@ To complete the initialization, you will need to iterate through the puzzle. For
 
 ### 6.3. The SudokuSolver Class
 
-This class needs to be **static**. As a result, each field and method also needs to be **static**. A method stub has been provided for each method. In addition, you will need to add a **private** field. We describe each of these members in what follows.
+Note that this class is **static**. As a result, each field and method also needs to be **static**. A method stub has been provided for each method. In addition, you will need to add a **private** field. We describe each of these members in what follows.
 
 #### 6.3.1. private field
 
@@ -234,15 +234,15 @@ This class needs a **private static readonly char** field to record the characte
 
 #### 6.3.2. The ReadFile method
 
-You will need to replace the **throw** with code that reads the given file, checks for the error conditions described in [Section 3.2. The "Open Puzzle File" Menu Item](#32-the-open-puzzle-file-menu-item), and if no exception is thrown, returns the contents of the file read. 
+You will need to replace the **throw** with code that reads the given file, checks for the error conditions described in [Section 3.2. The "Open Puzzle File" Menu Item](#32-the-open-puzzle-file-menu-item), and if no exception is thrown, returns the contents of the file read. Do *not* include any exception handling (i.e., **try**/**catch**) within this method. 
 
 Instead of using **File.ReadAllText** to read the file, use [**File.ReadAllLines**](https://learn.microsoft.com/en-us/dotnet/api/system.io.file.readalllines?view=net-6.0#system-io-file-readalllines(system-string)). This method works the same as **File.ReadAllText**, but instead of returning the file contents as a single **string**, it returns a **string[&nbsp;]** whose elements are the individual lines of the file. Obtain the number of rows/columns in a single block of the puzzles from the first element of this **string[&nbsp;]**. Check that this value is within the range specified by the constants defined in the **Utilities** class - if not, throw the appropriate exception as described in [Section 3.2. The "Open Puzzle File" Menu Item](#32-the-open-puzzle-file-menu-item). Note that you can include a message string within an **IOException** by passing it as the only parameter to the [**IOException** constructor](https://learn.microsoft.com/en-us/dotnet/api/system.io.ioexception.-ctor?view=net-6.0#system-io-ioexception-ctor(system-string)).
 
-Then iterate through the remaining elements of the **string[&nbsp;]** (i.e., all elements after the first). Check that the length of each of these strings is the correct length for the number of rows/columns in a block (see [Section 1.1. File Format](#11-file-format)). Don't use the **Math.Pow** method to raise a value to a power; instead, multiply the value by itself the appropriate number of times. If the length of a **string** is incorrect, throw the appropriate exception described in [Section 3.2. The "Open Puzzle File" Menu Item](#32-the-open-puzzle-file-menu-item). Note that line 1 of the file is stored in array location 0; hence, you will need to compute a line number from an array index. Once you've verified that a string has the correct length, check that each character in the string is either the character representing an empty cell or is a valid value for a cell within this puzzle. Use the constants defined in the **Utilities** class to do this check. If a character is invalid, throw the appropriate exception.
+Then iterate through the remaining elements of the **string[&nbsp;]** (i.e., all elements after the first). Check that the length of each of these strings is the correct length for the number of rows/columns in a block (see [Section 1.1. File Format](#11-file-format)). If the length of a **string** is incorrect, throw the appropriate exception described in [Section 3.2. The "Open Puzzle File" Menu Item](#32-the-open-puzzle-file-menu-item). Note that line 1 of the file is stored in array location 0; hence, you will need to compute a line number from an array index. Once you've verified that a string has the correct length, check that each character in the string either is the character representing an empty cell or is a valid value for a cell within this puzzle. Use the constants defined in the **Utilities** class to do this check. If a character is invalid, throw the appropriate exception.
 
 #### 6.3.3. The GetPuzzle method
 
-This method should return the puzzle described by the given **string**. The array returned should have `size` rows and columns. The element in row *i* and column *j* should contain the empty string if the puzzle has no value assigned to the cell at this location; otherwise, it should contain the value assigned to the cell at this location. Note that each value is a **string**; hence, the values stored will need to be **string**s such as "1", "2", etc.
+This method should return the puzzle described by the given **string**. The array returned should have `size` rows and columns. The element in row *i* and column *j* should contain the empty string if the puzzle has no value assigned to the cell at this location; otherwise, it should contain the value assigned to the cell at this location. Note that each value is a **string**; hence, the values stored will need to be **string**s.
 
 You may assume that the given **string** has the correct length (i.e., `size`<sup>2</sup>) and contains no invalid characters. After constructing an array of the appropriate size, set up nested loops to iterate through it. The outer loop should iterate through the rows, and the inner loop should iterate through the columns. Iterating in this way will visit the locations of the array in the same order as stepping through the given **string** from left to right. At each location, store the proper value.
 
@@ -250,7 +250,7 @@ You may assume that the given **string** has the correct length (i.e., `size`<su
 
 This method should attempt to solve the puzzle given in the **string[&nbsp;,&nbsp;]**. If it finds a solution, it should return **true**, and the array should contain the solution when the method returns. Otherwise, it should return **false**, and the contents of the array should be unchanged when the method returns. You may assume that the array has `blockSize`<sup>2</sup> rows and columns and contains only valid values, as described in [Section 6.3.3. The **GetPuzzle** method](#633-the-getpuzzle-method).
 
-First, construct a **PotentialConflicts** from the given puzzle. Then check the **PotentialConflicts** to see if it already has a conflict - if so, the puzzle has no solution. Otherwise, implement the algorithm described in [Section 4. The Algorithm to Solve Puzzles](#4-the-algorithm-to-solve-puzzles). Be sure to update the **PotentialConflicts** whenever you change a value in the array and to use the **PotentialConflicts** to determine whether setting a location to a particular value would introduce a conflict.
+First, construct a **PotentialConflicts** from the given puzzle. Then check the **PotentialConflicts** to see if it already has a conflict - if so, the puzzle has no solution. Otherwise, implement the algorithm described in [Section 4. The Algorithm to Solve Puzzles](#4-the-algorithm-to-solve-puzzles). Use a **Stack\<Location\>** for the stack. Be sure to update the **PotentialConflicts** whenever you change a value in the array and to use the **PotentialConflicts** to determine whether a particular guess is valid.
 
 #### 6.3.5. The CheckSolution method
 
