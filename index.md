@@ -162,7 +162,7 @@ To add this class:
 3. Replace the "Name" field at the bottom of the resulting dialog with "Location.cs".
 4. In the **class** statement of the resulting file, replace "**internal**" with "**public**".
 
-This class needs the following **public** properties, each implemented using the default implementation:
+This class needs the following **public** properties (see ["Properties"](https://cis300.cs.ksu.edu/appendix/syntax/properties/index.html), each implemented using the default implementation:
 
 - A **Row** property that gets an **int** giving the row of the location. It should not have a **set** accessor.
 - A **Column** property that gets an **int** giving the column of the location. It should not have a **set** accessor.
@@ -250,7 +250,7 @@ You may assume that the given **string** has the correct length (i.e., `size`<su
 
 This method should attempt to solve the puzzle given in the **string[&nbsp;,&nbsp;]**. If it finds a solution, it should return **true**, and the array should contain the solution when the method returns. Otherwise, it should return **false**, and the contents of the array should be unchanged when the method returns. You may assume that the array has `blockSize`<sup>2</sup> rows and columns and contains only valid values, as described in [Section 6.3.3. The **GetPuzzle** method](#633-the-getpuzzle-method).
 
-First, construct a **PotentialConflicts** from the given puzzle. Then check the **PotentialConflicts** to see if it already has a conflict - if so, the puzzle has no solution. Otherwise, implement the algorithm described in [Section 4. The Algorithm to Solve Puzzles](#4-the-algorithm-to-solve-puzzles). Use a **Stack\<Location\>** for the stack. Be sure to update the **PotentialConflicts** whenever you change a value in the array and to use the **PotentialConflicts** to determine whether a particular guess is valid.
+First, construct a **PotentialConflicts** from the given puzzle. Then check the **PotentialConflicts** to see if it already has a conflict - if so, the puzzle has no solution. Otherwise, implement the algorithm described in [Section 4. The Algorithm to Solve Puzzles](#4-the-algorithm-to-solve-puzzles). Do *not* use recursion. Use a **Stack\<Location\>** for the stack. Be sure to update the **PotentialConflicts** whenever you change a value in the array and to use the **PotentialConflicts** to determine whether a particular guess is valid.
 
 #### 6.3.5. The CheckSolution method
 
